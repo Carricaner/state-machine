@@ -1,0 +1,4 @@
+server:
+  # Start server port
+  port: 8090
+  shutdown: "graceful"
