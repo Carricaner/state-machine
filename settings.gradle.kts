@@ -1,2 +1,1 @@
-rootProject.name = "statemachine"
-
+rootProject.name = "state-machine"
