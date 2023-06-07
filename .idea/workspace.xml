@@ -5,12 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e3f3f245-3e20-4136-8b27-97daca717ae5" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/settings.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/settings.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Application.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/entrypoint/TestController.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,7 +81,7 @@
       <recent name="org.example.state" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.state-machine [publishToMavenLocal]">
+  <component name="RunManager" selected="Gradle.RichMenuTest.testRichMenuTransfer">
     <configuration name="RichMenuTest.testRichMenuTransfer" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -201,11 +196,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.RichMenuTest.testRichMenuTransfer" />
         <item itemvalue="Gradle.state-machine [publishToMavenLocal]" />
         <item itemvalue="Gradle.state-machine [build]" />
         <item itemvalue="Gradle.state-machine [clean]" />
         <item itemvalue="Gradle.statemachine [bootRun]" />
-        <item itemvalue="Gradle.RichMenuTest.testRichMenuTransfer" />
       </list>
     </recent_temporary>
   </component>

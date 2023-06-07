@@ -2,15 +2,11 @@ plugins {
     id("java")
     id("org.springframework.boot") version "2.7.0"
     id("io.spring.dependency-management") version "1.0.11.RELEASE"
-    id("maven-publish")
+    `maven-publish`
 }
 
-val myGroupId = "com.example"
-val myArtifactId = "state-machine"
-val myVersion = "1.0.0"
-
-group = myGroupId
-version = myVersion
+group = "com.example"
+version = "1.0.0"
 
 repositories {
     mavenCentral()
@@ -27,19 +23,21 @@ tasks.getByName<Test>("test") {
     useJUnitPlatform()
 }
 
-// publishing is not working now... :(
-//publishing {
-//    publications {
-//        create<MavenPublication>("mavenJava") {
-//            from(components["java"])
-//            groupId = myGroupId
-//            artifactId = myArtifactId
-//            version = myVersion
-//        }
-//    }
-//    repositories {
-//        maven {
-//            url = uri("${System.getProperty("user.home")}/.m2/repository")
-//        }
-//    }
-//}
+publishing {
+    publications {
+        create<MavenPublication>("myLibrary") {
+            from(components["java"])
+            versionMapping {
+                usage("java-api") {
+                    fromResolutionOf("runtimeClasspath")
+                }
+                usage("java-runtime") {
+                    fromResolutionResult()
+                }
+            }
+        }
+    }
+    repositories {
+        mavenLocal()
+    }
+}
