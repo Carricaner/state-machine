@@ -1,4 +1,4 @@
-package org.general.state.core.domain.richmenu.event;
+package org.general.state.core.domain.richmenu;
 
 public enum RichMenuEvent {
   PUBLISH,

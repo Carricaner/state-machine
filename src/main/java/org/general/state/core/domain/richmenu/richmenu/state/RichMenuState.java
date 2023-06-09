@@ -1,4 +1,4 @@
-package org.general.state.core.domain.richmenu.state;
+package org.general.state.core.domain.richmenu.richmenu.state;
 
 public enum RichMenuState {
   DRAFT,

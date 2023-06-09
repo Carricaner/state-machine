@@ -5,7 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e3f3f245-3e20-4136-8b27-97daca717ae5" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/general/state/core/domain/richmenu/RichMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/general/state/core/domain/richmenu/richmenu/RichMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/general/state/core/domain/richmenu/action/RichMenuPublishAction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/general/state/core/domain/richmenu/RichMenuPublishAction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/general/state/core/domain/richmenu/event/RichMenuEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/general/state/core/domain/richmenu/RichMenuEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/general/state/core/domain/richmenu/state/RichMenuState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/general/state/core/domain/richmenu/richmenu/state/RichMenuState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/general/state/state/Action.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/general/state/core/domain/richmenu/Action.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/general/state/state/StateManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/general/state/core/domain/richmenu/StateManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/general/state/state/StateManagerBuildException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/general/state/core/domain/richmenu/StateManagerBuildException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/general/state/state/StateTransitionException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/general/state/core/domain/richmenu/StateTransitionException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/general/state/state/Transition.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/general/state/core/domain/richmenu/Transition.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/RichMenuTest.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

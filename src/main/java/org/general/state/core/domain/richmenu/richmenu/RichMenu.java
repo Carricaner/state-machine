@@ -1,9 +1,9 @@
-package org.general.state.core.domain.richmenu;
+package org.general.state.core.domain.richmenu.richmenu;
 
-import org.general.state.core.domain.richmenu.action.RichMenuPublishAction;
-import org.general.state.core.domain.richmenu.event.RichMenuEvent;
-import org.general.state.core.domain.richmenu.state.RichMenuState;
-import org.general.state.state.StateManager;
+import org.general.state.core.domain.richmenu.RichMenuPublishAction;
+import org.general.state.core.domain.richmenu.RichMenuEvent;
+import org.general.state.core.domain.richmenu.richmenu.state.RichMenuState;
+import org.general.state.core.domain.richmenu.StateManager;
 
 public class RichMenu {
   private final StateManager<RichMenuState, RichMenuEvent> stateManager =

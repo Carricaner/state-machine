@@ -1,4 +1,4 @@
-package org.general.state.state;
+package org.general.state.core.domain.richmenu;
 
 public class StateTransitionException extends RuntimeException {
 

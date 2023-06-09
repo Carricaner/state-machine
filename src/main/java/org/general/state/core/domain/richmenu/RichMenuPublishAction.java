@@ -1,6 +1,4 @@
-package org.general.state.core.domain.richmenu.action;
-
-import org.general.state.state.Action;
+package org.general.state.core.domain.richmenu;
 
 public class RichMenuPublishAction implements Action {
 
