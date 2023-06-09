@@ -26,7 +26,7 @@ publishing {
     repositories {
         maven {
             name = "state-machine"
-            url = uri("https://maven.pkg.github.com/Carricaner/my-first-library")
+            url = uri("https://maven.pkg.github.com/Carricaner/state-machine")
             credentials {
                 username = System.getenv("GITHUB_ACTOR")
                 password = System.getenv("GITHUB_TOKEN")
