@@ -1,9 +1,8 @@
-package org.example.state;
+package org.general.state.state;
 
 import java.util.AbstractMap.SimpleImmutableEntry;
 import java.util.HashMap;
 import java.util.Map;
-import org.example.state.Transition.From;
 
 
 public class StateManager<S extends Enum<S>, E extends Enum<E>> {
@@ -12,10 +11,10 @@ public class StateManager<S extends Enum<S>, E extends Enum<E>> {
 
   Transition<S, E> transition;
 
-  public From<S, E> start() {
+  public Transition.From<S, E> start() {
     transition = new Transition<>(this);
 
-    return new From<>(transition);
+    return new Transition.From<>(transition);
   }
 
   boolean hasSameSourceState(S sourceState) {

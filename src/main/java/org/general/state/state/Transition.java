@@ -1,4 +1,4 @@
-package org.example.state;
+package org.general.state.state;
 
 import java.util.AbstractMap.SimpleImmutableEntry;
 import java.util.HashMap;

@@ -1,4 +1,4 @@
-package org.example.state;
+package org.general.state.state;
 
 /** An action to be executed when transiting between status */
 @FunctionalInterface

@@ -1,4 +1,4 @@
-package org.example.state;
+package org.general.state.state;
 
 public class StateManagerBuildException extends RuntimeException {
 

@@ -1,5 +1,5 @@
-import org.example.core.domain.richmenu.RichMenu;
-import org.example.core.domain.richmenu.state.RichMenuState;
+import org.general.state.core.domain.richmenu.RichMenu;
+import org.general.state.core.domain.richmenu.state.RichMenuState;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

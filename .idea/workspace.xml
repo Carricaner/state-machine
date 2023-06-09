@@ -6,6 +6,18 @@
   <component name="ChangeListManager">
     <list default="true" id="e3f3f245-3e20-4136-8b27-97daca717ae5" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/general/state/Application.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/core/domain/richmenu/RichMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/general/state/core/domain/richmenu/RichMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/core/domain/richmenu/action/RichMenuPublishAction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/general/state/core/domain/richmenu/action/RichMenuPublishAction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/core/domain/richmenu/event/RichMenuEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/general/state/core/domain/richmenu/event/RichMenuEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/core/domain/richmenu/state/RichMenuState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/general/state/core/domain/richmenu/state/RichMenuState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/state/Action.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/general/state/state/Action.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/state/StateManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/general/state/state/StateManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/state/StateManagerBuildException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/general/state/state/StateManagerBuildException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/state/StateTransitionException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/general/state/state/StateTransitionException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/state/Transition.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/general/state/state/Transition.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/RichMenuTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/RichMenuTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,6 +44,17 @@
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="state-machine" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="state-machine" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="state-machine" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="build" type="c8890929:TasksNode$1" />
               </path>
             </expand>
             <select />
@@ -77,11 +100,14 @@
   }
 }</component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="org.example.state" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.RichMenuTest.testRichMenuTransfer">
+  <component name="RunManager" selected="Gradle.state-machine [build]">
     <configuration name="RichMenuTest.testRichMenuTransfer" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -172,7 +198,7 @@
       <ForceTestExec>false</ForceTestExec>
       <method v="2" />
     </configuration>
-    <configuration name="statemachine [bootRun]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="state-machine [publish]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -183,7 +209,7 @@
         </option>
         <option name="taskNames">
           <list>
-            <option value="bootRun" />
+            <option value="publish" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -196,11 +222,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.RichMenuTest.testRichMenuTransfer" />
-        <item itemvalue="Gradle.state-machine [publishToMavenLocal]" />
         <item itemvalue="Gradle.state-machine [build]" />
         <item itemvalue="Gradle.state-machine [clean]" />
-        <item itemvalue="Gradle.statemachine [bootRun]" />
+        <item itemvalue="Gradle.state-machine [publishToMavenLocal]" />
+        <item itemvalue="Gradle.state-machine [publish]" />
+        <item itemvalue="Gradle.RichMenuTest.testRichMenuTransfer" />
       </list>
     </recent_temporary>
   </component>
