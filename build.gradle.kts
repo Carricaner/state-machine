@@ -41,7 +41,7 @@ publishing {
         }
     }
     publications {
-        register<MavenPublication>("state-machine") {
+        register<MavenPublication>("gpr") {
             from(components["java"])
         }
     }
