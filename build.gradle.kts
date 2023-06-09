@@ -1,10 +1,11 @@
 plugins {
     id("java")
     id("maven-publish")
+    // It is prohibited to add `version` for any plugins added here
 }
 
-group = "com.example"
-version = "1.0.0"
+group = "org.general.state"
+version = "1.1.0"
 
 repositories {
     mavenCentral()
@@ -38,7 +39,7 @@ publishing {
         }
     }
     publications {
-        register<MavenPublication>("gpr") {
+        register<MavenPublication>("state-machine") {
             from(components["java"])
         }
     }
