@@ -66,47 +66,6 @@ public class StateManager<S extends Enum<S>, E extends Enum<E>> {
     return s.getKey();
   }
 
-  /**
-   * Create a transition from sourceState to targetState on event
-   *
-   * @deprecated Use `from` to define transition instead
-   * @param sourceState
-   * @param event
-   * @param targetState
-   * @return
-   */
-  @Deprecated(forRemoval = true)
-  public StateManager<S, E> fromTo(S sourceState, E event, S targetState)
-      throws StateManagerBuildException {
-    fromTo(sourceState, event, targetState, null);
-    return this;
-  }
-
-  /**
-   * Create a transition from sourceState to targetState on event and execute an action when
-   * transiting
-   *
-   * @deprecated Use `from` to define transition instead
-   * @param sourceState
-   * @param event
-   * @param targetState
-   * @param action
-   * @return
-   */
-  @Deprecated(forRemoval = true)
-  public StateManager<S, E> fromTo(S sourceState, E event, S targetState,  Action action)
-      throws StateManagerBuildException {
-    Map<E, SimpleImmutableEntry<S,  Action>> s =
-        transitions.getOrDefault(sourceState, new HashMap<>());
-    if (s.containsKey(event)) {
-      throw new StateManagerBuildException("There is a same event already");
-    }
-    s.put(event, new SimpleImmutableEntry<>(targetState, action));
-    transitions.put(sourceState, s);
-
-    return this;
-  }
-
   void addTransition() throws StateManagerBuildException {
     if (transition == null) {
       throw new StateManagerBuildException("Please call the from method first");
@@ -125,4 +84,6 @@ public class StateManager<S extends Enum<S>, E extends Enum<E>> {
           transitions.put(sourceState, map);
         });
   }
+
+
 }

@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "org.general.state"
-version = "1.0.0"
+version = "1.0.1"
 
 repositories {
     mavenCentral()
@@ -14,6 +14,11 @@ repositories {
 dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.1")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.8.1")
+
+    // Functional programming
+    val vavrVersion = "0.10.4";
+    implementation("io.vavr:vavr:$vavrVersion")
+    implementation("io.vavr:vavr-test:$vavrVersion")
 }
 
 tasks.getByName<Test>("test") {
