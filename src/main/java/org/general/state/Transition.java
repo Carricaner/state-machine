@@ -8,79 +8,79 @@ import org.general.state.action.DefaultAction;
 import org.general.state.event.Event;
 import org.general.state.state.State;
 
-public class Transition {
-  private final StateManagerSecBuilder builder;
-  private final State from;
-  private Event when;
-  private Tuple2<State, State> to;
+public class Transition<S, E> {
+  private final StateManagerSecBuilder<S, E> builder;
+  private final State<S> from;
+  private Event<S, E> when;
+  private Tuple2<State<S>, State<S>> to;
   private Tuple2<Action, Action> actions =
       Tuple.of(new DefaultAction(), new DefaultAction());
 
-  public Transition(StateManagerSecBuilder builder, State from) {
+  public Transition(StateManagerSecBuilder<S, E> builder, State<S> from) {
     this.builder = builder;
     this.from = from;
   }
 
-  public State getFrom() {
+  public State<S> getFrom() {
     return from;
   }
 
-  public Event getWhen() {
+  public Event<S, E> getWhen() {
     return when;
   }
 
-  public Tuple2<Tuple2<State, Action>, Tuple2<State, Action>> getToStatesAndActions() {
+  public Tuple2<Tuple2<State<S>, Action>, Tuple2<State<S>, Action>> getToStatesAndActions() {
     return Tuple.of(Tuple.of(to._1, actions._1), Tuple.of(to._2, actions._2));
   }
 
-  public static class When {
-    private final Transition transition;
+  public static class When<S, E> {
+    private final Transition<S, E> transition;
 
-    public When(Transition transition) {
+    public When(Transition<S, E> transition) {
       this.transition = transition;
     }
 
-    public To when(Event event) {
+    public To<S, E> when(Event<S, E> event) {
       this.transition.when = event;
-      return new To(transition);
+      return new To<S, E>(transition);
     }
   }
 
-  public static class To {
-    private final Transition transition;
+  public static class To<S, E> {
+    private final Transition<S, E> transition;
 
-    public To(Transition transition) {
+    public To(Transition<S, E> transition) {
       this.transition = transition;
     }
 
-    public Act to(State successState, State failureState) {
+    public Act<S, E> to(State<S> successState, State<S> failureState) {
       this.transition.to = new Tuple2<>(successState, failureState);
       return new Act(transition);
     }
 
-    public Act to(State state) {
+    public Act<S, E> to(State<S> state) {
       this.transition.to = new Tuple2<>(state, state);
       return new Act(transition);
     }
   }
 
-  public static class Act {
-    private final Transition transition;
+  public static class Act<S, E> {
+    private final Transition<S, E> transition;
 
-    public Act(Transition transition) {
+    public Act(Transition<S, E> transition) {
       this.transition = transition;
     }
 
-    public Act andDo(Action successAction, Action failureAction) {
+    public Act<S, E> andDo(Action successAction, Action failureAction) {
       this.transition.actions = Tuple.of(successAction, failureAction);
       return this;
     }
 
-    public To when(Event event) {
+    public To<S, E> when(Event<S, E> event) {
       this.transition.builder.addTransition(this.transition);
       erase();
       this.transition.when = event;
-      return new To(transition);
+      return new To<>(transition);
     }
 
     private void erase() {

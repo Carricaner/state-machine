@@ -7,9 +7,9 @@ import org.general.state.event.EventOOO;
 import org.general.state.state.State;
 import org.general.state.state.StateOOO;
 
-public class Coupon implements Stateful<String> {
+public class Coupon implements Stateful<String, Integer> {
   private String state = StateOOO.A.getStateInfo();
-  private StateManager s =
+  private final StateManager<String, Integer> s =
       StateManager.builder(this)
           .from(
               StateOOO.A,
@@ -41,7 +41,7 @@ public class Coupon implements Stateful<String> {
                       .finished())
           .build();
 
-  public void changeToState(Event<String> event) {
+  public void changeToState(Event<String, Integer> event) {
     s.transfer(StateOOO.fromName(state).orElseThrow(), event);
   }
 

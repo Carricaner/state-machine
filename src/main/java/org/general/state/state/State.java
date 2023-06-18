@@ -1,5 +1,5 @@
 package org.general.state.state;
 
-public interface State<T> {
-  T getStateInfo();
+public interface State<S> {
+  S getStateInfo();
 }

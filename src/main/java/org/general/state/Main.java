@@ -7,6 +7,7 @@ public class Main {
   public static void main(String[] args) {
     Coupon coupon = new Coupon();
     coupon.changeToState(EventOOO.a);
+    coupon.changeToState(EventOOO.c);
     coupon.printState();
   }
 }

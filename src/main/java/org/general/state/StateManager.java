@@ -13,23 +13,23 @@ import org.general.state.error.TransitionErrorDetails.TransitionErrorDetail;
 import org.general.state.event.Event;
 import org.general.state.state.State;
 
-public class StateManager {
-  private final Map<State, Map<Event, Tuple2<Tuple2<State, Action>, Tuple2<State, Action>>>> map;
+public class StateManager<S, E> {
+  private final Map<State<S>, Map<Event<S, E>, Tuple2<Tuple2<State<S>, Action>, Tuple2<State<S>, Action>>>> map;
 
-  private final Stateful stateful;
+  private final Stateful<S, E> stateful;
 
   private StateManager(
-      Map<State, Map<Event, Tuple2<Tuple2<State, Action>, Tuple2<State, Action>>>> map,
-      Stateful stateful) {
+      Map<State<S>, Map<Event<S, E>, Tuple2<Tuple2<State<S>, Action>, Tuple2<State<S>, Action>>>> map,
+      Stateful<S, E> stateful) {
     this.map = map;
     this.stateful = stateful;
   }
 
-  public static StateManagerSecBuilder builder(Stateful stateful) {
-    return new StateManagerSecBuilder(stateful);
+  public static <S, E> StateManagerSecBuilder<S, E> builder(Stateful<S, E> stateful) {
+    return new StateManagerSecBuilder<>(stateful);
   }
 
-  public void transfer(State from, Event event) {
+  public void transfer(State<S> from, Event<S, E> event) {
     if (!map.containsKey(from)) {
       throw new StateMachineException(
           new TransitionErrorDetail("Cannot transfer from: " + from.toString()));
@@ -38,7 +38,7 @@ public class StateManager {
       throw new StateMachineException(
           new TransitionErrorDetail("Cannot transfer through: " + event.toString()));
     }
-    Tuple2<Tuple2<State, Action>, Tuple2<State, Action>> tuple = map.get(from).get(event);
+    Tuple2<Tuple2<State<S>, Action>, Tuple2<State<S>, Action>> tuple = map.get(from).get(event);
     if (event.succeed(stateful)) {
       tuple._1._2.run();
       stateful.changeToState(tuple._1._1);
@@ -49,22 +49,22 @@ public class StateManager {
   }
 
   // Builder
-  public static class StateManagerSecBuilder {
-    private Map<State, Map<Event, Tuple2<Tuple2<State, Action>, Tuple2<State, Action>>>> map;
-    private final Stateful stateful;
+  public static class StateManagerSecBuilder<S, E> {
+    private final Stateful<S, E> stateful;
+    private final Map<State<S>, Map<Event<S, E>, Tuple2<Tuple2<State<S>, Action>, Tuple2<State<S>, Action>>>> map;
 
-    private StateManagerSecBuilder(Stateful stateful) {
+    private StateManagerSecBuilder(Stateful<S, E> stateful) {
       map = new HashMap<>();
       this.stateful = stateful;
     }
 
-    public StateManagerSecBuilder from(State from, Consumer<When> when) {
-      Transition transition = new Transition(this, from);
-      when.accept(new When(transition));
+    public StateManagerSecBuilder<S, E> from(State<S> from, Consumer<When<S, E>> when) {
+      Transition<S, E> transition = new Transition<>(this, from);
+      when.accept(new When<>(transition));
       return this;
     }
 
-    public void addTransition(Transition transition) {
+    public void addTransition(Transition<S, E> transition) {
       check(transition, map);
       if (!map.containsKey(transition.getFrom())) {
         map.put(transition.getFrom(), new HashMap<>());
@@ -72,21 +72,21 @@ public class StateManager {
       map.get(transition.getFrom()).put(transition.getWhen(), transition.getToStatesAndActions());
     }
 
-    public StateManager build() {
-      return new StateManager(map, stateful);
+    public StateManager<S, E> build() {
+      return new StateManager<>(map, stateful);
     }
 
     public void check(
-        Transition transition,
-        Map<State, Map<Event, Tuple2<Tuple2<State, Action>, Tuple2<State, Action>>>> map) {
+        Transition<S, E> transition,
+        Map<State<S>, Map<Event<S, E>, Tuple2<Tuple2<State<S>, Action>, Tuple2<State<S>, Action>>>> map) {
 
       if (transition == null || transition.getFrom() == null) {
         throw new StateMachineException(
             new TransitionBuildErrorDetail(transition, (trans) -> "Invalid transition"));
       }
 
-      State from = transition.getFrom();
-      Event when = transition.getWhen();
+      State<S> from = transition.getFrom();
+      Event<S, E> when = transition.getWhen();
       if (map.get(from) != null && map.get(from).containsKey(when)) {
         throw new StateMachineException(
             new TransitionBuildErrorDetail(
@@ -96,7 +96,7 @@ public class StateManager {
                         + transition.getWhen().toString()
                         + ", has been registered."));
       }
-      List<State> list =
+      List<State<S>> list =
           List.of(
               transition.getToStatesAndActions()._1._1, transition.getToStatesAndActions()._2._1);
       if (list.contains(from)) {
