@@ -1,4 +1,4 @@
-package org.general.state.core.practice.exception;
+package org.general.state.error;
 
 import java.util.function.Function;
 

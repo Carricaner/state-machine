@@ -1,4 +1,4 @@
-package org.general.state.core.practice.exception;
+package org.general.state.error;
 
 public class StateMachineException extends RuntimeException {
   public StateMachineException(ErrorDetail<?> detail) {
