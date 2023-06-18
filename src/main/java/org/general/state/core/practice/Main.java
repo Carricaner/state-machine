@@ -21,6 +21,8 @@ public class Main {
                         .when(Event.c)
                         .to(State.C, State.D)
                         .andDo(new OneAction(), new TwoAction())
+                        .when(Event.d)
+                        .to(State.D)
                         .finished())
             .from(
                 State.B,
@@ -36,7 +38,5 @@ public class Main {
                         .andDo(new OneAction(), new TwoAction())
                         .finished())
             .build();
-
-    System.out.println(s);
   }
 }

@@ -33,49 +33,54 @@ public class TransitionII {
     return Tuple.of(Tuple.of(to._1, actions._1), Tuple.of(to._2, actions._2));
   }
 
-  public static class When<S, E> {
+  public static class When {
     private final TransitionII transition;
 
     public When(TransitionII transition) {
       this.transition = transition;
     }
 
-    public To<S, E> when(EventII event) {
+    public To when(EventII event) {
       this.transition.when = event;
-      return new To<>(transition);
+      return new To(transition);
     }
   }
 
-  public static class To<S, E> {
+  public static class To {
     private final TransitionII transition;
 
     public To(TransitionII transition) {
       this.transition = transition;
     }
 
-    public Act<S, E> to(StateII successState, StateII failureState) {
+    public Act to(StateII successState, StateII failureState) {
       this.transition.to = new Tuple2<>(successState, failureState);
-      return new Act<>(transition);
+      return new Act(transition);
+    }
+
+    public Act to(StateII state) {
+      this.transition.to = new Tuple2<>(state, state);
+      return new Act(transition);
     }
   }
 
-  public static class Act<S, E> {
+  public static class Act {
     private final TransitionII transition;
 
     public Act(TransitionII transition) {
       this.transition = transition;
     }
 
-    public Act<S, E> andDo(ActionII successAction, ActionII failureAction) {
+    public Act andDo(ActionII successAction, ActionII failureAction) {
       this.transition.actions = Tuple.of(successAction, failureAction);
       return this;
     }
 
-    public To<S, E> when(EventII event) {
+    public To when(EventII event) {
       this.transition.builder.addTransition(this.transition);
       erase();
       this.transition.when = event;
-      return new To<>(transition);
+      return new To(transition);
     }
 
     private void erase() {
