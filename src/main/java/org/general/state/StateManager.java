@@ -40,6 +40,7 @@ public class StateManager<S, E> {
    * @param event the event
    * @return boolean - represents whether the event is successful or not
    */
+  @SuppressWarnings("UnusedReturnValue")
   public boolean transfer(State<S> from, Event<S, E> event) {
     if (!map.containsKey(from)) {
       throw new StateMachineException(
@@ -61,7 +62,7 @@ public class StateManager<S, E> {
     return success;
   }
 
-  public List<Event<S,E>> getPossibleEvents() {
+  public List<Event<S, E>> getPossibleEvents() {
     State<S> state = stateful.getState();
     if (state != null && map.containsKey(state)) {
       return map.get(stateful.getState()).keySet().stream().toList();
@@ -72,8 +73,7 @@ public class StateManager<S, E> {
   public List<State<S>> getPossibleStates() {
     State<S> state = stateful.getState();
     if (state != null && map.containsKey(state)) {
-      return map.get(stateful.getState()).values()
-          .stream()
+      return map.get(stateful.getState()).values().stream()
           .map(tuple -> tuple.map(_1 -> _1._1, _2 -> _2._1))
           .flatMap(tuple -> Stream.of(tuple._1, tuple._2))
           .distinct()
@@ -81,7 +81,6 @@ public class StateManager<S, E> {
     }
     return List.of();
   }
-
 
   // Builder
   public static class StateManagerSecBuilder<S, E> {
