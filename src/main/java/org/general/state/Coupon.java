@@ -1,5 +1,6 @@
 package org.general.state;
 
+import java.util.List;
 import org.general.state.action.OneAction;
 import org.general.state.action.TwoAction;
 import org.general.state.event.Event;
@@ -8,7 +9,7 @@ import org.general.state.state.State;
 import org.general.state.state.StateOOO;
 
 public class Coupon implements Stateful<String, Integer> {
-  private String state = StateOOO.A.getStateInfo();
+  private State<String> state = StateOOO.A;
   private final StateManager<String, Integer> s =
       StateManager.builder(this)
           .from(
@@ -42,11 +43,24 @@ public class Coupon implements Stateful<String, Integer> {
           .build();
 
   public void changeToState(Event<String, Integer> event) {
-    s.transfer(StateOOO.fromName(state).orElseThrow(), event);
+    s.transfer(state, event);
   }
 
-  public void changeToState(State<String> state) {
-    this.state = state.getStateInfo();
+  public void changeToState(State<String> newState) {
+    this.state = newState;
+  }
+
+  @Override
+  public State<String> getState() {
+    return state;
+  }
+
+  public List<Event<String, Integer>> getPossibleEvents() {
+    return s.getPossibleEvents();
+  }
+
+  public List<State<String>> getPossibleStates() {
+    return s.getPossibleStates();
   }
 
   void printState() {
