@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "org.general.state"
-version = "1.1.4"
+version = "1.1.6"
 
 repositories {
     mavenCentral()
@@ -14,6 +14,10 @@ repositories {
 dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.1")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.8.1")
+
+    // Assertion
+    val assertJVersion = "3.24.2";
+    implementation("org.assertj:assertj-core:$assertJVersion")
 
     // Functional programming
     val vavrVersion = "0.10.4";

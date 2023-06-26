@@ -42,7 +42,7 @@ public class Transition<S, E> {
 
     public To<S, E> when(Event<S, E> event) {
       this.transition.when = event;
-      return new To<S, E>(transition);
+      return new To<>(transition);
     }
   }
 
@@ -55,12 +55,12 @@ public class Transition<S, E> {
 
     public Act<S, E> to(State<S> successState, State<S> failureState) {
       this.transition.to = new Tuple2<>(successState, failureState);
-      return new Act(transition);
+      return new Act<>(transition);
     }
 
     public Act<S, E> to(State<S> state) {
       this.transition.to = new Tuple2<>(state, state);
-      return new Act(transition);
+      return new Act<>(transition);
     }
   }
 
@@ -69,6 +69,10 @@ public class Transition<S, E> {
 
     public Act(Transition<S, E> transition) {
       this.transition = transition;
+    }
+
+    public Act<S, E> andDo(Action successAction) {
+      return andDo(successAction, successAction);
     }
 
     public Act<S, E> andDo(Action successAction, Action failureAction) {

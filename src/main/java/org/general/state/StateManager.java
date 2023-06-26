@@ -36,12 +36,11 @@ public class StateManager<S, E> {
   /**
    * The method is to transfer the state from "from" through "event".
    *
-   * @param from the from state
+   * @param from the starting state
    * @param event the event
-   * @return boolean - represents whether the event is successful or not
+   * @return Tuple2 - _1 is whether the transition is successful or not; _2 is the destination state
    */
-  @SuppressWarnings("UnusedReturnValue")
-  public boolean transfer(State<S> from, Event<S, E> event) {
+  public Tuple2<Boolean, State<S>> transfer(State<S> from, Event<S, E> event) {
     if (!map.containsKey(from)) {
       throw new StateMachineException(
           new TransitionErrorDetail("Cannot transfer from: " + from.toString()));
@@ -52,14 +51,10 @@ public class StateManager<S, E> {
     }
     Tuple2<Tuple2<State<S>, Action>, Tuple2<State<S>, Action>> tuple = map.get(from).get(event);
     boolean success = event.succeed(stateful);
-    if (success) {
-      tuple._1._2.run();
-      stateful.changeToState(tuple._1._1);
-    } else {
-      tuple._2._2.run();
-      stateful.changeToState(tuple._2._1);
-    }
-    return success;
+    State<S> finalState = success ? tuple._1._1 : tuple._2._1;
+    Action action = success ? tuple._1._2 : tuple._2._2;
+    action.run();
+    return new Tuple2<>(success, finalState);
   }
 
   public List<Event<S, E>> getPossibleEvents() {
@@ -132,19 +127,6 @@ public class StateManager<S, E> {
                     "The identical event, "
                         + transition.getWhen().toString()
                         + ", has been registered."));
-      }
-      List<State<S>> list =
-          List.of(
-              transition.getToStatesAndActions()._1._1, transition.getToStatesAndActions()._2._1);
-      if (list.contains(from)) {
-        throw new StateMachineException(
-            new TransitionBuildErrorDetail(
-                transition,
-                (trans) ->
-                    "The target states, "
-                        + list
-                        + ", contains the from state, "
-                        + from.toString()));
       }
     }
   }
