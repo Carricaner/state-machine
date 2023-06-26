@@ -44,6 +44,9 @@ public class MovieTicket implements Stateful<String, Integer> {
                       .when(MovieTicketEvent.REDEEM)
                       .to(MovieTicketState.REDEEMED)
                       .andDo(new RedeemAction(this))
+                      .when(MovieTicketEvent.DELETE)
+                      .to(MovieTicketState.DELETED)
+                      .andDo(new DeleteAction(this))
                       .finished())
           .build();
 

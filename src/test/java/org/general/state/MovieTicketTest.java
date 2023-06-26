@@ -5,6 +5,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import org.general.state.component.movieticket.MovieTicket;
 import org.general.state.component.movieticket.MovieTicketActions.BookFailAction;
 import org.general.state.component.movieticket.MovieTicketActions.BookSuccessAction;
+import org.general.state.component.movieticket.MovieTicketActions.DeleteAction;
+import org.general.state.component.movieticket.MovieTicketActions.RedeemAction;
 import org.general.state.component.movieticket.MovieTicketActions.ReleaseAction;
 import org.general.state.component.movieticket.MovieTicketState;
 import org.junit.jupiter.api.Order;
@@ -13,7 +15,7 @@ import org.junit.jupiter.api.Test;
 class MovieTicketTest {
   @Test
   @Order(5)
-  void test_Transit_From_Script_To_Released() {
+  void test_Transit_From_Script_To_Released_Successfully() {
     // Arrange
     MovieTicket movieTicket = new MovieTicket(MovieTicketState.DRAFT);
 
@@ -45,7 +47,7 @@ class MovieTicketTest {
 
   @Test
   @Order(15)
-  void test_Transit_From_Released_Successfully() {
+  void test_Transit_From_Released_To_Booked_Successfully() {
     // Arrange
     MovieTicket movieTicket = new MovieTicket(MovieTicketState.RELEASED);
 
@@ -59,4 +61,35 @@ class MovieTicketTest {
         .hasFieldOrPropertyWithValue("checkString", BookSuccessAction.MESSAGE);
   }
 
+  @Test
+  @Order(20)
+  void test_Transit_From_Booked_To_Redeemed_Successfully() {
+    // Arrange
+    MovieTicket movieTicket = new MovieTicket(MovieTicketState.BOOKED);
+
+    // Act
+    boolean isSuccessful = movieTicket.redeem();
+
+    // Assert
+    assertThat(isSuccessful).isEqualTo(true);
+    assertThat(movieTicket)
+        .hasFieldOrPropertyWithValue("state", MovieTicketState.REDEEMED)
+        .hasFieldOrPropertyWithValue("checkString", RedeemAction.MESSAGE);
+  }
+
+  @Test
+  @Order(25)
+  void test_Transit_From_Booked_To_Deleted_Successfully() {
+    // Arrange
+    MovieTicket movieTicket = new MovieTicket(MovieTicketState.BOOKED);
+
+    // Act
+    boolean isSuccessful = movieTicket.delete();
+
+    // Assert
+    assertThat(isSuccessful).isEqualTo(true);
+    assertThat(movieTicket)
+        .hasFieldOrPropertyWithValue("state", MovieTicketState.DELETED)
+        .hasFieldOrPropertyWithValue("checkString", DeleteAction.MESSAGE);
+  }
 }
