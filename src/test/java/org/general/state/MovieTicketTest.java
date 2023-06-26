@@ -1,6 +1,7 @@
 package org.general.state;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.general.state.component.movieticket.MovieTicket;
 import org.general.state.component.movieticket.MovieTicketActions.BookFailAction;
@@ -9,6 +10,8 @@ import org.general.state.component.movieticket.MovieTicketActions.DeleteAction;
 import org.general.state.component.movieticket.MovieTicketActions.RedeemAction;
 import org.general.state.component.movieticket.MovieTicketActions.ReleaseAction;
 import org.general.state.component.movieticket.MovieTicketState;
+import org.general.state.error.StateMachineException;
+import org.general.state.error.TransitionErrorDetails.TransitionErrorDetail;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 
@@ -91,5 +94,29 @@ class MovieTicketTest {
     assertThat(movieTicket)
         .hasFieldOrPropertyWithValue("state", MovieTicketState.DELETED)
         .hasFieldOrPropertyWithValue("checkString", DeleteAction.MESSAGE);
+  }
+
+  @Test
+  void test_Transit_Error_Due_To_Invalid_Event() {
+    // Arrange
+    MovieTicket movieTicket = new MovieTicket(MovieTicketState.DRAFT);
+
+    // Act & Assert
+    assertThatThrownBy(movieTicket::book)
+        .isInstanceOf(StateMachineException.class)
+        .extracting("detail")
+        .isInstanceOf(TransitionErrorDetail.class);
+  }
+
+  @Test
+  void test_Transit_Error_Due_To_Invalid_Starting_State() {
+    // Arrange
+    MovieTicket movieTicket = new MovieTicket(MovieTicketState.DELETED);
+
+    // Act & Assert
+    assertThatThrownBy(movieTicket::release)
+        .isInstanceOf(StateMachineException.class)
+        .extracting("detail")
+        .isInstanceOf(TransitionErrorDetail.class);
   }
 }

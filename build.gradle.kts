@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "org.general.state"
-version = "1.1.7"
+version = "1.1.8"
 
 repositories {
     mavenCentral()
@@ -38,9 +38,9 @@ publishing {
                 username = System.getenv("GITHUB_ACTOR")
                 password = System.getenv("GITHUB_TOKEN")
             }
-            // Replace above credential with below one when you wanna publish it locally
+            // Replace above credential with below one when you want to publish it locally
             // 1. Add gradle.properties under the root
-            // 2. Replace the credential with below one
+            // 2. Replace the credential with below
             // credentials {
             //     username = project.findProperty("gpr.user") as String? ?: System.getenv("GPR_USER")
             //     password = project.findProperty("gpr.key") as String? ?: System.getenv("GPR_KEY")
