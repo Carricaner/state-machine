@@ -5,15 +5,18 @@ plugins {
 }
 
 group = "org.general.state"
-version = "1.1.9"
+version = "1.1.10"
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.1")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.8.1")
+    // Test
+    val junitVersion = "5.9.2";
+    testImplementation("org.junit.jupiter:junit-jupiter-api:$junitVersion")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$junitVersion")
+    testImplementation("org.junit.jupiter:junit-jupiter-params:$junitVersion")
 
     // Mock
     val mockitoVersion = "5.4.0";

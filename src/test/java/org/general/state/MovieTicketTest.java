@@ -14,13 +14,15 @@ import org.general.state.component.movieticket.MovieTicketState;
 import org.general.state.error.StateMachineException;
 import org.general.state.error.TransitionErrorDetails.TransitionBuildErrorDetail;
 import org.general.state.error.TransitionErrorDetails.TransitionErrorDetail;
-import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.EnumSource;
 import org.mockito.Mockito;
 
 class MovieTicketTest {
   @Test
-  @Order(5)
+  @DisplayName("Scripted --|Release(O)|--> Released")
   void test_Transit_From_Script_To_Released_Successfully() {
     // Arrange
     MovieTicket movieTicket = new MovieTicket(MovieTicketState.DRAFT);
@@ -36,7 +38,7 @@ class MovieTicketTest {
   }
 
   @Test
-  @Order(10)
+  @DisplayName("Released --|Book(X)|--> Released")
   void test_Transit_From_Released_To_Booked_But_Fail_And_Rollback_To_Released() {
     // Arrange
     MovieTicket movieTicket = new MovieTicket(MovieTicketState.RELEASED);
@@ -52,7 +54,7 @@ class MovieTicketTest {
   }
 
   @Test
-  @Order(15)
+  @DisplayName("Released --|Book(O)|--> Released")
   void test_Transit_From_Released_To_Booked_Successfully() {
     // Arrange
     MovieTicket movieTicket = new MovieTicket(MovieTicketState.RELEASED);
@@ -68,7 +70,7 @@ class MovieTicketTest {
   }
 
   @Test
-  @Order(20)
+  @DisplayName("Booked --|Redeem(O)|--> Redeemed")
   void test_Transit_From_Booked_To_Redeemed_Successfully() {
     // Arrange
     MovieTicket movieTicket = new MovieTicket(MovieTicketState.BOOKED);
@@ -83,11 +85,14 @@ class MovieTicketTest {
         .hasFieldOrPropertyWithValue("checkString", RedeemAction.MESSAGE);
   }
 
-  @Test
-  @Order(25)
-  void test_Transit_From_Booked_To_Deleted_Successfully() {
+  @ParameterizedTest
+  @EnumSource(
+      value = MovieTicketState.class,
+      names = {"DRAFT", "RELEASED", "BOOKED"})
+  @DisplayName("Certain State --|Delete(O)|--> Deleted")
+  void test_Transit_From_Certain_State_To_Deleted_Successfully(MovieTicketState state) {
     // Arrange
-    MovieTicket movieTicket = new MovieTicket(MovieTicketState.BOOKED);
+    MovieTicket movieTicket = new MovieTicket(state);
 
     // Act
     boolean isSuccessful = movieTicket.delete();
@@ -128,17 +133,19 @@ class MovieTicketTest {
     // Arrange
     MovieTicket mockMovieTicket = Mockito.mock(MovieTicket.class);
 
-    assertThatThrownBy(() -> StateManager.builder(mockMovieTicket)
-        .from(
-            MovieTicketState.DRAFT,
-            transition ->
-                transition
-                    .when(MovieTicketEvent.RELEASE)
-                    .to(MovieTicketState.RELEASED)
-                    .when(MovieTicketEvent.RELEASE)
-                    .to(MovieTicketState.RELEASED)
-                    .finished())
-        .build())
+    assertThatThrownBy(
+            () ->
+                StateManager.builder(mockMovieTicket)
+                    .from(
+                        MovieTicketState.DRAFT,
+                        transition ->
+                            transition
+                                .when(MovieTicketEvent.RELEASE)
+                                .to(MovieTicketState.RELEASED)
+                                .when(MovieTicketEvent.RELEASE)
+                                .to(MovieTicketState.RELEASED)
+                                .finished())
+                    .build())
         .isInstanceOf(StateMachineException.class)
         .extracting("detail")
         .isInstanceOf(TransitionBuildErrorDetail.class);
