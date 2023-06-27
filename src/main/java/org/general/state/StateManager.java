@@ -103,10 +103,6 @@ public class StateManager<S, E> {
       map.get(transition.getFrom()).put(transition.getWhen(), transition.getToStatesAndActions());
     }
 
-    public StateManager<S, E> build() {
-      return new StateManager<>(map, stateful);
-    }
-
     public void check(
         Transition<S, E> transition,
         Map<State<S>, Map<Event<S, E>, Tuple2<Tuple2<State<S>, Action>, Tuple2<State<S>, Action>>>>
@@ -128,6 +124,10 @@ public class StateManager<S, E> {
                         + transition.getWhen().toString()
                         + ", has been registered."));
       }
+    }
+
+    public StateManager<S, E> build() {
+      return new StateManager<>(map, stateful);
     }
   }
 }

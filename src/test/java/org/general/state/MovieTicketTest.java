@@ -9,11 +9,14 @@ import org.general.state.component.movieticket.MovieTicketActions.BookSuccessAct
 import org.general.state.component.movieticket.MovieTicketActions.DeleteAction;
 import org.general.state.component.movieticket.MovieTicketActions.RedeemAction;
 import org.general.state.component.movieticket.MovieTicketActions.ReleaseAction;
+import org.general.state.component.movieticket.MovieTicketEvent;
 import org.general.state.component.movieticket.MovieTicketState;
 import org.general.state.error.StateMachineException;
+import org.general.state.error.TransitionErrorDetails.TransitionBuildErrorDetail;
 import org.general.state.error.TransitionErrorDetails.TransitionErrorDetail;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 class MovieTicketTest {
   @Test
@@ -118,5 +121,26 @@ class MovieTicketTest {
         .isInstanceOf(StateMachineException.class)
         .extracting("detail")
         .isInstanceOf(TransitionErrorDetail.class);
+  }
+
+  @Test
+  void test_Build_State_Manager_But_Fail_Due_To_Repeated_Event_Under_The_Same_From_State() {
+    // Arrange
+    MovieTicket mockMovieTicket = Mockito.mock(MovieTicket.class);
+
+    assertThatThrownBy(() -> StateManager.builder(mockMovieTicket)
+        .from(
+            MovieTicketState.DRAFT,
+            transition ->
+                transition
+                    .when(MovieTicketEvent.RELEASE)
+                    .to(MovieTicketState.RELEASED)
+                    .when(MovieTicketEvent.RELEASE)
+                    .to(MovieTicketState.RELEASED)
+                    .finished())
+        .build())
+        .isInstanceOf(StateMachineException.class)
+        .extracting("detail")
+        .isInstanceOf(TransitionBuildErrorDetail.class);
   }
 }

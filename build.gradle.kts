@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "org.general.state"
-version = "1.1.8"
+version = "1.1.9"
 
 repositories {
     mavenCentral()
@@ -14,6 +14,10 @@ repositories {
 dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.1")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.8.1")
+
+    // Mock
+    val mockitoVersion = "5.4.0";
+    implementation("org.mockito:mockito-core:$mockitoVersion")
 
     // Assertion
     val assertJVersion = "3.24.2";
