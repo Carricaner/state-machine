@@ -5,7 +5,7 @@ easily.
 
 ## Latest Release
 
-2023-08-23 *LATEST RELEASE* v1.1.11
+2023-08-23 *LATEST RELEASE* v1.2.0
 
 ## Documentation 
 

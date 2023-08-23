@@ -7,7 +7,6 @@ import org.general.state.state.State;
 public enum MovieTicketState implements State<String> {
   DRAFT("draft"),
   RELEASED("released"),
-  LOCKED("locked"),
   BOOKED("booked"),
   DELETED("deleted"),
   REDEEMED("redeemed");
@@ -16,7 +15,6 @@ public enum MovieTicketState implements State<String> {
       Map.ofEntries(
           Map.entry("draft", DRAFT),
           Map.entry("released", RELEASED),
-          Map.entry("locked", LOCKED),
           Map.entry("booked", BOOKED),
           Map.entry("deleted", DELETED),
           Map.entry("redeemed", REDEEMED));

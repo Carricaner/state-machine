@@ -5,12 +5,11 @@ import org.general.state.event.Event;
 
 public enum MovieTicketEvent implements Event<String, Integer> {
   RELEASE,
-  LOCK,
   BOOK {
     private int releaseTimes = 0;
 
     @Override
-    public boolean succeed(Stateful<String, Integer> stateful) {
+    public boolean succeed() {
       releaseTimes++;
       return releaseTimes > 1;
     }
@@ -19,7 +18,7 @@ public enum MovieTicketEvent implements Event<String, Integer> {
   REDEEM;
 
   @Override
-  public boolean succeed(Stateful<String, Integer> stateful) {
+  public boolean succeed() {
     return true;
   }
 }

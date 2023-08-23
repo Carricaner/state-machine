@@ -50,7 +50,7 @@ public class StateManager<S, E> {
           new TransitionErrorDetail("Cannot transfer through: " + event.toString()));
     }
     Tuple2<Tuple2<State<S>, Action>, Tuple2<State<S>, Action>> tuple = map.get(from).get(event);
-    boolean success = event.succeed(stateful);
+    boolean success = event.succeed();
     State<S> finalState = success ? tuple._1._1 : tuple._2._1;
     Action action = success ? tuple._1._2 : tuple._2._2;
     action.run();

@@ -13,7 +13,7 @@ import org.general.state.event.Event;
 import org.general.state.state.State;
 
 public class MovieTicket implements Stateful<String, Integer> {
-  private final StateManager<String, Integer> s =
+  private final StateManager<String, Integer> map =
       StateManager.builder(this)
           .from(
               MovieTicketState.DRAFT,
@@ -59,25 +59,25 @@ public class MovieTicket implements Stateful<String, Integer> {
   }
 
   public boolean release() {
-    Tuple2<Boolean, State<String>> tuple = s.transfer(state, MovieTicketEvent.RELEASE);
+    Tuple2<Boolean, State<String>> tuple = map.transfer(state, MovieTicketEvent.RELEASE);
     state = tuple._2;
     return tuple._1;
   }
 
   public boolean book() {
-    Tuple2<Boolean, State<String>> tuple = s.transfer(state, MovieTicketEvent.BOOK);
+    Tuple2<Boolean, State<String>> tuple = map.transfer(state, MovieTicketEvent.BOOK);
     state = tuple._2;
     return tuple._1;
   }
 
   public boolean redeem() {
-    Tuple2<Boolean, State<String>> tuple = s.transfer(state, MovieTicketEvent.REDEEM);
+    Tuple2<Boolean, State<String>> tuple = map.transfer(state, MovieTicketEvent.REDEEM);
     state = tuple._2;
     return tuple._1;
   }
 
   public boolean delete() {
-    Tuple2<Boolean, State<String>> tuple = s.transfer(state, MovieTicketEvent.DELETE);
+    Tuple2<Boolean, State<String>> tuple = map.transfer(state, MovieTicketEvent.DELETE);
     state = tuple._2;
     return tuple._1;
   }
@@ -89,12 +89,12 @@ public class MovieTicket implements Stateful<String, Integer> {
 
   @Override
   public List<Event<String, Integer>> getPossibleEvents() {
-    return s.getPossibleEvents();
+    return map.getPossibleEvents();
   }
 
   @Override
   public List<State<String>> getPossibleStates() {
-    return s.getPossibleStates();
+    return map.getPossibleStates();
   }
 
   public String getCheckString() {
